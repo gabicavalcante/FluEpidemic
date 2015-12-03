@@ -2,6 +2,10 @@ package flu.epidemic;
 
 /**
  * Enum to represents the STATUS of a person.
+ *
+ * @author Raquel Lopes de Oliveira
+ * @version 1.0
+ * @created 03/12/2015
  */
 public enum Status {
     HEALTHY("helthy"),
@@ -21,7 +25,7 @@ public enum Status {
     }
 
     /**
-     * Method that change the direction to String
+     * Method to change status to String
      * @return name
      */
     public String toString() {
@@ -29,9 +33,9 @@ public enum Status {
     }
 
     /**
-     * Method that receive a direction like string and return a object Direction
-     * @param status string with the direction
-     * @return object Direction
+     * Method that receive a status as string and return the object Status
+     * @param status string with the status
+     * @return object Status
      */
     public static Status fromString(String status){
         if (status != null){
