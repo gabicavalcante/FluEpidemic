@@ -1,4 +1,4 @@
-package flu.epidemic;
+package flu.epidemic.Enum;
 
 /**
  * Enum to represents the STATUS of a person.
