@@ -9,27 +9,29 @@ package flu.epidemic;
  */
 public enum Status {
     HEALTHY("helthy"),
-    SICK("sick"),
+    SICK("sick"), //infected
     CONTAGIUS("contagious"),
-    RECOVERING("recovering");
+    RECOVERING("recovering"),
     DEAD("dead");
 
-    private String name = "";
+    private String status = "";
+   // private Status previousStatus = "helthy";
 
     /**
      * Constructor enum
-     * @param name
+     * @param status
      */
-    Direction(String name) {
-        this.name = name;
+    Status(String status) {
+        this.status = status;
+        //this.previousStatus = previousStatus;
     }
 
     /**
      * Method to change status to String
-     * @return name
+     * @return status
      */
     public String toString() {
-        return name;
+        return status;
     }
 
     /**
@@ -45,4 +47,5 @@ public enum Status {
         }
         return null;
     }
+
 }

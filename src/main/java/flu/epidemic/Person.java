@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by gabriela on 26/11/15.
  */
-public class Person {
+public class Person extends LivingBeings{
     private boolean infect;
     private Date dateInfection;
 

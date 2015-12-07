@@ -6,9 +6,12 @@ package flu.epidemic;
  * @author Gabriela Cavalcante
  * @version 2015.11.30
  */
-public class Animal {
+public class Animal extends  LivingBeings{
 
-    private boolean alive;
-    private boolean infected;
+    private Status state;
+
+    public Animal(){
+        state = Status.HEALTHY;
+    }
 
 }
