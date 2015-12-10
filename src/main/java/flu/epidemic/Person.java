@@ -1,5 +1,7 @@
 package flu.epidemic;
 
+import flu.epidemic.Enum.Being;
+
 import java.util.Date;
 
 /**
@@ -10,5 +12,9 @@ public class Person extends LivingBeings{
     private Date dateInfection;
 
     private static final int CONTAGIOUS = 2;
+
+    public Person(){
+        
+    }
 
 }

@@ -1,17 +1,16 @@
 package flu.epidemic;
 
+import flu.epidemic.Enum.Being;
 import flu.epidemic.Enum.Status;
 
 /**
  * Created by gabriela on 03/12/15.
  */
-public class LivingBeings {
+public abstract class LivingBeings {
 
-    private Status state;
+    protected Status state;
+    protected Being type;
+    protected Virus virus;
 
-    /* gets and setters*/
-    public Status getState (){
-        return state;
-    }
 
 }

@@ -1,5 +1,6 @@
 package flu.epidemic;
 
+import flu.epidemic.Enum.Being;
 import flu.epidemic.Enum.Status;
 
 /**
@@ -10,10 +11,9 @@ import flu.epidemic.Enum.Status;
  */
 public class Animal extends LivingBeings{
 
-    private Status state;
-
     public Animal(){
-        state = Status.HEALTHY;
+        super();
+        this.virus = new H1N1();
     }
 
 }
