@@ -10,5 +10,6 @@ public class Pig extends Animal{
     public Pig(){
         super();
         this.type = Being.PIG;
+        this.virus = new H1N1();
     }
 }

@@ -12,8 +12,8 @@ import flu.epidemic.Enum.Status;
 public class Animal extends LivingBeings{
 
     public Animal(){
-        super();
         this.virus = new H1N1();
+        this.canRecover = false;
     }
 
 }
