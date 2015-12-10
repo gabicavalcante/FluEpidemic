@@ -8,5 +8,7 @@ import flu.epidemic.Enum.TypeVirus;
 public class H1N1 extends Virus {
     public H1N1(){
         this.name = TypeVirus.H1N1;
+        this.incubationTime = 3;
+        this.mortalityRate = 0.75;
     }
 }

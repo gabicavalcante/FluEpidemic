@@ -9,7 +9,7 @@ package flu.epidemic.Enum;
  */
 public enum TypeVirus {
     H1N1("H1N1"),
-    H1N5("H1N5");
+    H5N1("H5N1");
 
     private String name= "";
 
