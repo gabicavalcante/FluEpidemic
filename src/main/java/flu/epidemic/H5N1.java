@@ -10,6 +10,6 @@ public class H5N1 extends Virus {
     public H5N1(){
         this.name = TypeVirus.H5N1;
         this.incubationTime = 5;
-        this.mortalityRate = 1; // Dont recover 
+        this.mortalityRate = 1; // Don't recover
     }
 }

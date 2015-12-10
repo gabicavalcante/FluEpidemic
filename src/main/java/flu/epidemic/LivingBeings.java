@@ -13,7 +13,6 @@ public abstract class LivingBeings {
     protected Status state;
     protected Being type;
     protected Virus virus;
-    protected boolean canRecover;
 
     public boolean wasInfected(){
         Random random = new Random();
