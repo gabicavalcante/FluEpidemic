@@ -8,7 +8,7 @@ package flu.epidemic.Enum;
  * @created 03/12/2015
  */
 public enum Status {
-    HEALTHY("helthy"),
+    HEALTHY("healthy"),
     SICK("sick"), //infected
     CONTAGIUS("contagious"),
     RECOVERING("recovering"),
@@ -33,6 +33,8 @@ public enum Status {
     public String toString() {
         return status;
     }
+
+    public boolean isEquals(Status status) { return this.status.equalsIgnoreCase(status.toString()); }
 
     /**
      * Method that receive a status as string and return the object Status
