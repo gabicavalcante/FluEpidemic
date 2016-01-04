@@ -103,7 +103,7 @@ public class Simulator {
      * (4000 steps).
      */
     public void runLongSimulation() {
-        simulate(80000);
+        simulate(4000);
     }
 
     /**
@@ -133,8 +133,7 @@ public class Simulator {
         for (int i = 0; i < livingBeings.size() - 1; i++) {
             LivingBeings being = livingBeings.get(i);
             being.act();
-            if (being.isAlive()) {
-                livingBeings.remove(i);
+            if (being.isAlive()) { 
                 livingBeings.set(i, being);
             } else {
                 livingBeings.remove(i);

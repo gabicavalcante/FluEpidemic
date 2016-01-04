@@ -41,8 +41,8 @@ public abstract class LivingBeings {
     public boolean isAlive()
     {
         if (state.equals(State.DEAD))
-            return true;
-        return false;
+            return false;
+        return true;
     }
 
     /**
