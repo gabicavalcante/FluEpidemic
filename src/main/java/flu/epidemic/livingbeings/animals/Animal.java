@@ -1,9 +1,13 @@
 package flu.epidemic.livingbeings.animals;
 
-import flu.epidemic.Enum.Being;
+import flu.epidemic.livingbeings.Being;
+import flu.epidemic.states.State;
 import flu.epidemic.livingbeings.LivingBeings;
 import flu.epidemic.simulator.Field;
 import flu.epidemic.simulator.Location;
+import flu.epidemic.simulator.Randomizer;
+
+import java.util.Random;
 
 /**
  * A class representing shared characteristics of animals.
@@ -14,8 +18,6 @@ import flu.epidemic.simulator.Location;
 public abstract class Animal extends LivingBeings {
     // Whether the animal is alive or not.
     private boolean alive;
-    // The animal's field.
-    private Field field;
     // The animal's position in the field.
     private Location location;
 
@@ -27,20 +29,19 @@ public abstract class Animal extends LivingBeings {
      */
     public Animal(Being being, Field field, Location location)
     {
-        super(being);
+        super(being, field, location);
         this.field = field;
-        setLocation(location);
-    }
 
-    public Animal(Being being){
-        super(being);
+        // some animals already being sick with their specific virus
+        Random rand = Randomizer.getRandom();
+        if (rand.nextBoolean()) this.state = State.CONTAGIUS;
     }
 
     /**
      * Check whether the animal is alive or not.
      * @return true if the animal is still alive.
      */
-    protected boolean isAlive()
+    public boolean isAlive()
     {
         return alive;
     }

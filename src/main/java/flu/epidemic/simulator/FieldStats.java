@@ -52,11 +52,9 @@ public class FieldStats {
      * @return An int with the number for this class.
      */
     public int getPopulationCount(Field field, Class key) {
-        if (!countsValid) {
-            generateCounts(field);
-        }
-
+        if (!countsValid) generateCounts(field);
         Counter counter = counters.get(key);
+        if (counter == null) return 0;
         return counter.getCount();
     }
 

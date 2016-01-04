@@ -38,10 +38,6 @@ public class GraphView implements SimulatorView {
      *            The height of the plotter window (in pixles).
      * @param startMax
      *            The initial maximum value for the y axis.
-     * @param world
-     *            The world object.
-     * @param class1
-     *            The first class to be plotted.
      * @param width
      *            The second class to be plotted.
      */

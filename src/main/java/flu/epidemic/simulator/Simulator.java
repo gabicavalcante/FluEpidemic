@@ -1,14 +1,16 @@
 package flu.epidemic.simulator;
 
-import flu.epidemic.Enum.Being;
-import flu.epidemic.livingbeings.Animal;
+import flu.epidemic.exceptions.DimensionNegativeException;
+import flu.epidemic.livingbeings.animals.*;
 import flu.epidemic.livingbeings.Person;
 import flu.epidemic.livingbeings.LivingBeings;
 
+import java.util.Iterator;
 import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 import java.awt.Color;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A simple predator-prey simulator, based on a rectangular field containing
@@ -24,12 +26,15 @@ public class Simulator {
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 80;
     // The probability that a person will be created in any given grid position.
-    private static final double PERSON_CREATION_PROBABILITY = 0.02;
+    private static final double PERSON_CREATION_PROBABILITY = 0.08;
     // The probability that a animal will be created in any given grid position.
-    private static final double ANIMAL_CREATION_PROBABILITY = 0.08;
+    private static final double CHICKEN_CREATION_PROBABILITY = 0.01; // 0.02
+    private static final double DUCK_CREATION_PROBABILITY = 0.02; // 0.04
+    private static final double PIG_CREATION_PROBABILITY = 0.03; // 0.06
+
 
     // List of living beings in the field.
-    private List<LivingBeings> livingBeingses;
+    private List<LivingBeings> livingBeings;
     // The current state of the field.
     private Field field;
     // The current step of the simulation.
@@ -53,32 +58,44 @@ public class Simulator {
      *            Width of the field. Must be greater than zero.
      */
     public Simulator(int depth, int width) {
-        if (width <= 0 || depth <= 0) {
-            System.out.println("The dimensions must be greater than zero.");
-            System.out.println("Using default values.");
+        try {
+            if (width <= 0 || depth <= 0)
+                throw new DimensionNegativeException("The dimensions must be greater than zero.");
+        } catch (DimensionNegativeException e) {
+                e.printStackTrace();
+        } finally {
             depth = DEFAULT_DEPTH;
             width = DEFAULT_WIDTH;
         }
 
-        livingBeingses = new ArrayList<>();
+        livingBeings = new ArrayList<>();
         field = new Field(depth, width);
 
         views = new ArrayList<>();
 
         SimulatorView view = new GridView(depth, width);
-        view.setColor(Person.class, Color.ORANGE);
-        view.setColor(Animal.class, Color.BLUE);
-        view.setColor(Animal.class, Color.GRAY);
-        views.add(view);
-
-        view = new GraphView(500, 150, 500);
         view.setColor(Person.class, Color.BLACK);
-        view.setColor(Animal.class, Color.RED);
-        view.setColor(Animal.class, Color.GREEN);
+        view.setColor(Chicken.class, Color.BLUE);
+        view.setColor(Pig.class, Color.GRAY);
+        view.setColor(Duck.class, Color.ORANGE);
         views.add(view);
 
+        // startGraphView(view);
         // Setup a valid starting point.
         reset();
+    }
+
+    /**
+     * Launches the busy GUI in a separate thread.
+     */
+    private void startGraphView(SimulatorView view) {
+        // creates a new thread to run the busy GUI
+        view = new GraphView(500, 150, 500);
+        view.setColor(Person.class, Color.GREEN);
+        view.setColor(Chicken.class, Color.RED);
+        view.setColor(Pig.class, Color.CYAN);
+        view.setColor(Duck.class, Color.MAGENTA);
+        views.add(view);
     }
 
     /**
@@ -86,7 +103,7 @@ public class Simulator {
      * (4000 steps).
      */
     public void runLongSimulation() {
-        simulate(4000);
+        simulate(80000);
     }
 
     /**
@@ -98,6 +115,11 @@ public class Simulator {
      */
     public void simulate(int numSteps) {
         for (int step = 1; step <= numSteps && views.get(0).isViable(field); step++) {
+            try {
+                TimeUnit.MILLISECONDS.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             simulateOneStep();
         }
     }
@@ -108,16 +130,16 @@ public class Simulator {
      */
     public void simulateOneStep() {
         step++;
-
-        // Provide space for newborn animals.
-        List<LivingBeings> newAnimals = new ArrayList<>();
-        // Let all rabbits act.
-        for (LivingBeings animal : livingBeingses) {
+        for (int i = 0; i < livingBeings.size() - 1; i++) {
+            LivingBeings being = livingBeings.get(i);
+            being.act();
+            if (being.isAlive()) {
+                livingBeings.remove(i);
+                livingBeings.set(i, being);
+            } else {
+                livingBeings.remove(i);
+            }
         }
-
-        // Add the newly born foxes and rabbits to the main lists.
-        livingBeingses.addAll(newAnimals);
-
         updateViews();
     }
 
@@ -126,11 +148,10 @@ public class Simulator {
      */
     public void reset() {
         step = 0;
-        livingBeingses.clear();
+        livingBeings.clear();
         for (SimulatorView view : views) {
             view.reset();
         }
-
         populate();
         updateViews();
     }
@@ -146,17 +167,28 @@ public class Simulator {
 
     /**
      * Randomly populate the field with animals and people.
-     * TODO: see this class after
      */
     private void populate() {
         Random rand = Randomizer.getRandom();
         field.clear();
         for (int row = 0; row < field.getDepth(); row++) {
             for (int col = 0; col < field.getWidth(); col++) {
-                if (rand.nextDouble() <= ANIMAL_CREATION_PROBABILITY) {
+                if (rand.nextDouble() <= DUCK_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
+                    LivingBeings duck = new Duck(field, location);
+                    livingBeings.add(duck);
+                } else if (rand.nextDouble() <= CHICKEN_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    LivingBeings chicken = new Chicken(field, location);
+                    livingBeings.add(chicken);
+                } else if (rand.nextDouble() <= PIG_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    LivingBeings pig = new Pig(field, location);
+                    livingBeings.add(pig);
                 } else if (rand.nextDouble() <= PERSON_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
+                    LivingBeings person = new Person(field, location);
+                    livingBeings.add(person);
                 }
             }
         }

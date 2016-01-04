@@ -1,6 +1,9 @@
 package flu.epidemic.livingbeings.animals;
 
-import flu.epidemic.Enum.Being;
+import flu.epidemic.livingbeings.Being;
+import flu.epidemic.simulator.Field;
+import flu.epidemic.simulator.Location;
+import flu.epidemic.states.State;
 
 /**
  * @author Raquel Oliveira, Gabriela Cavalcante
@@ -9,8 +12,7 @@ import flu.epidemic.Enum.Being;
 public class Duck extends Bird {
     private Being type;
 
-    public Duck(){
-        super();
-        this.type = Being.DUCK;
+    public Duck(Field field, Location location){
+        super(Being.DUCK, field, location);
     }
 }
