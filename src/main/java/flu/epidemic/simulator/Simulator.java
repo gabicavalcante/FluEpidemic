@@ -80,7 +80,7 @@ public class Simulator {
         view.setColor(Duck.class, Color.ORANGE);
         views.add(view);
 
-        // startGraphView(view);
+        startGraphView(view);
         // Setup a valid starting point.
         reset();
     }
@@ -116,7 +116,7 @@ public class Simulator {
     public void simulate(int numSteps) {
         for (int step = 1; step <= numSteps && views.get(0).isViable(field); step++) {
             try {
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
