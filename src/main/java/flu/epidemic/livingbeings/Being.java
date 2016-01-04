@@ -2,11 +2,35 @@ package flu.epidemic.livingbeings;
 
 /**
  * @author Raquel Oliveira
- * @version 07/12/2015.
+ * @author Huang Xiaohan
+ * @version 04/01/2015.
  */
 public enum Being {
-    PERSON,
-    CHICKEN,
-    DUCK,
-    PIG
+    PERSON("person"),
+    CHICKEN("chicken"),
+    DUCK("duck"),
+    PIG("pig");
+    
+    private String being = "";
+
+    /**
+     * Constructor enum
+     * @param being current being
+     */
+    Being(String being) {
+        this.being = being;
+    }
+
+    /**
+     * Method to change being to String
+     * @return current being
+     */
+    public String toString() {
+        return this.being;
+    }
+    
+    
+    public boolean isEquals(Being being) { 
+    	return this.being.equalsIgnoreCase(being.toString());
+    }
 }
