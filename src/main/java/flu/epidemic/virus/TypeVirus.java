@@ -25,9 +25,8 @@ public enum TypeVirus {
      * Method to change name to String
      * @return status
      */
+    @Override
     public String toString() {
         return name;
     }
-
-
 }
