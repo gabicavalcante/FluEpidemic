@@ -16,7 +16,9 @@ import java.util.List;
 public abstract class LivingBeings {
     protected State state;
     protected Being type;
-    protected Virus virus;
+    
+
+	protected Virus virus;
     protected Location location;
     protected Field field;
     protected boolean alive;
@@ -107,4 +109,12 @@ public abstract class LivingBeings {
     public Virus getVirus() {
         return virus;
     }
+    
+    /**
+     * Return the type
+     * @return the type
+     */
+    public Being getType() {
+		return type;
+	}
 }

@@ -21,6 +21,10 @@ public abstract class Animal extends LivingBeings {
     private boolean alive;
     // The animal's position in the field.
     private Location location;
+    // after infected, the time of infection is increment
+    private int timeInfection;
+    // after contagious, the time of contagious is increment
+    private int timeContagious;
 
     /**
      * Create a new animal at location in field.
