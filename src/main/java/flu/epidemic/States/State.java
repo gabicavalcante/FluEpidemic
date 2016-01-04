@@ -1,4 +1,4 @@
-package flu.epidemic.states;
+package flu.epidemic.States;
 
 /**
  * util to represents the STATUS of a person.

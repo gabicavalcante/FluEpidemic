@@ -1,10 +1,11 @@
 package flu.epidemic.livingbeings.animals;
 
 import flu.epidemic.livingbeings.Being;
+
 import flu.epidemic.livingbeings.LivingBeings;
 import flu.epidemic.simulator.Field;
 import flu.epidemic.simulator.Location;
-import flu.epidemic.states.State;
+import flu.epidemic.States.State;
 import flu.epidemic.virus.H1N1;
 
 import java.util.List;

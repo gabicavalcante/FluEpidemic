@@ -103,7 +103,7 @@ public class Simulator {
      * (4000 steps).
      */
     public void runLongSimulation() {
-        simulate(4000);
+        simulate(80000);
     }
 
     /**
@@ -116,7 +116,7 @@ public class Simulator {
     public void simulate(int numSteps) {
         for (int step = 1; step <= numSteps && views.get(0).isViable(field); step++) {
             try {
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -134,6 +134,7 @@ public class Simulator {
             LivingBeings being = livingBeings.get(i);
             being.act();
             if (being.isAlive()) {
+                livingBeings.remove(i);
                 livingBeings.set(i, being);
             } else {
                 livingBeings.remove(i);
