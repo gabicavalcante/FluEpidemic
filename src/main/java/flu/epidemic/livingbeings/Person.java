@@ -4,12 +4,11 @@ import java.util.Date;
 
 import java.util.List;
 
-import flu.epidemic.States.State;
-import flu.epidemic.States.StatesManager;
+import flu.epidemic.states.State;
+import flu.epidemic.states.StatesManager;
 import flu.epidemic.simulator.Field;
 
 import flu.epidemic.simulator.Location;
-import flu.epidemic.virus.Virus;
 
 /**
  * @author Huang Xiaohan
@@ -32,8 +31,6 @@ public class Person extends LivingBeings {
 
     public Person(Field field, Location location) {
         super(Being.PERSON, field, location);
-        // All people are healthy in the beginning
-        this.state = State.HEALTHY;
         this.statesManager = new StatesManager(field, location);
         this.timeInfection = 0;
     }

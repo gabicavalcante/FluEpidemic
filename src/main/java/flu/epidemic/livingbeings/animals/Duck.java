@@ -4,7 +4,7 @@ import flu.epidemic.livingbeings.Being;
 
 import flu.epidemic.simulator.Field;
 import flu.epidemic.simulator.Location;
-import flu.epidemic.States.State;
+import flu.epidemic.states.State;
 
 /**
  * @author Raquel Oliveira, Gabriela Cavalcante
