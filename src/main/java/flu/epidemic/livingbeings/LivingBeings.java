@@ -3,7 +3,7 @@ package flu.epidemic.livingbeings;
 import flu.epidemic.simulator.Field;
 
 import flu.epidemic.simulator.Location;
-import flu.epidemic.States.State;
+import flu.epidemic.states.*;
 import flu.epidemic.virus.Virus;
 
 import java.util.List;
@@ -26,6 +26,7 @@ public abstract class LivingBeings {
         this.virus = null;
         alive = true;
         this.field = field;
+        this.state = State.HEALTHY;
         setLocation(location);
     }
 
