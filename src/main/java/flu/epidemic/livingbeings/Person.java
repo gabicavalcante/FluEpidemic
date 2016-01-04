@@ -1,7 +1,7 @@
 package flu.epidemic.livingbeings;
 
 import flu.epidemic.states.State;
-import flu.epidemic.states.PersonStatesManager;
+import flu.epidemic.states.StatesManager;
 import flu.epidemic.simulator.Field;
 
 import flu.epidemic.simulator.Location;
@@ -17,7 +17,7 @@ public class Person extends LivingBeings {
     private static final double CONTAGIOUS = 2;
 
     // manager of the state
-    PersonStatesManager statesManager;
+    StatesManager statesManager;
     // after infected, the time of infection is increment
     private int timeInfection;
     // after contagious, the time of contagious is increment
@@ -29,7 +29,7 @@ public class Person extends LivingBeings {
         super(Being.PERSON, field, location);
         // All people are healthy in the beginning
         this.state = State.HEALTHY;
-        this.statesManager = new PersonStatesManager(field, location);
+        this.statesManager = new StatesManager(field, location);
         this.timeInfection = 0;
     }
 

@@ -13,19 +13,19 @@ import java.util.Random;
  * @author Gabriela Cavalcante
  * @created 03/01/16.
  */
-public class PersonStatesManager {
+public class StatesManager {
     private State currentState;
     private Field field;
     private Location location;
     private Virus currentVirus;
 
-    public PersonStatesManager(Field field, Location location) {
+    public StatesManager(Field field, Location location) {
         currentState = State.HEALTHY;
         this.field = field;
         this.location = location;
     }
 
-    public PersonStatesManager(State state, Field field, Location location) {
+    public StatesManager(State state, Field field, Location location) {
         this.currentState = state;
         this.field = field;
         this.location = location;
