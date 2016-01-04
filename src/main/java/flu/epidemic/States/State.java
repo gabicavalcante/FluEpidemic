@@ -1,40 +1,38 @@
-package flu.epidemic.States;
+package flu.epidemic.states;
 
 /**
- * Enum to represents the STATUS of a person.
+ * util to represents the STATUS of a person.
  *
  * @author Raquel Lopes de Oliveira
- * @version 1.0
+ * @author Gabriela Cavalcante
  * @created 03/12/2015
  */
 public enum State {
     HEALTHY("healthy"),
-    SICK("sick"), //infected
+    SICK("sick"),
     CONTAGIUS("contagious"),
     RECOVERING("recovering"),
     DEAD("dead");
 
-    private String status = "";
-   // private State previousStatus = "helthy";
+    private String state = "";
 
     /**
      * Constructor enum
-     * @param status
+     * @param state current state
      */
-    State(String status) {
-        this.status = status;
-        //this.previousStatus = previousStatus;
+    State(String state) {
+        this.state = state;
     }
 
     /**
      * Method to change status to String
-     * @return status
+     * @return current state
      */
     public String toString() {
-        return status;
+        return this.state;
     }
 
-    public boolean isEquals(State state) { return this.status.equalsIgnoreCase(state.toString()); }
+    public boolean isEquals(State state) { return this.state.equalsIgnoreCase(state.toString()); }
 
     /**
      * Method that receive a status as string and return the object State
@@ -49,5 +47,4 @@ public enum State {
         }
         return null;
     }
-
 }
