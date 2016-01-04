@@ -13,7 +13,7 @@ public class H1N1 extends Virus {
         this.recoverTime = 3;
         this.contagiousTime = 3;
 
-        this.mortalityRate = 0.75;
+        this.mortalityRate = 0.5;
         this.infectionRate = 0.5;
     }
 }

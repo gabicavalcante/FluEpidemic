@@ -1,10 +1,15 @@
 package flu.epidemic.livingbeings;
 
-import flu.epidemic.states.State;
-import flu.epidemic.states.StatesManager;
+import java.util.Date;
+
+import java.util.List;
+
+import flu.epidemic.States.State;
+import flu.epidemic.States.StatesManager;
 import flu.epidemic.simulator.Field;
 
 import flu.epidemic.simulator.Location;
+import flu.epidemic.virus.Virus;
 
 /**
  * @author Huang Xiaohan

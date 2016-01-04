@@ -1,4 +1,4 @@
-package flu.epidemic.states;
+package flu.epidemic.States;
 
 import flu.epidemic.livingbeings.LivingBeings;
 import flu.epidemic.livingbeings.Person;
@@ -54,7 +54,7 @@ public class StatesManager {
     private State analyseStateContagious(Virus virus, int timeContagious) {
         Random rand = Randomizer.getRandom();
         if (timeContagious == virus.getContagiousTime()) {
-            if (rand.nextDouble() >= virus.getMortalityRate())
+            if (rand.nextDouble() <= virus.getMortalityRate())
                 return State.DEAD;
         }
         return State.RECOVERING;
@@ -70,9 +70,12 @@ public class StatesManager {
     private State analyseStateHealthy() {
         for (Location loc : field.adjacentLocations(location)) {
             LivingBeings beings = (LivingBeings) field.getObjectAt(loc);
-            if (beings != null && beings instanceof Person && beings.getState().isEquals(State.CONTAGIUS)) {
-                currentVirus = beings.getVirus();
-                return State.SICK;
+            Random rand = Randomizer.getRandom();
+            if (beings != null && beings.getState().isEquals(State.CONTAGIUS)) {
+                if(rand.nextDouble() <= beings.getVirus().getInfectionRate()){
+                	currentVirus = beings.getVirus();
+                    return State.SICK;
+                }
             }
         }
         return State.HEALTHY;

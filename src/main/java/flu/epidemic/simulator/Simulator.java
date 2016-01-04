@@ -80,7 +80,7 @@ public class Simulator {
         view.setColor(Duck.class, Color.ORANGE);
         views.add(view);
 
-        startGraphView(view);
+        // startGraphView(view);
         // Setup a valid starting point.
         reset();
     }
@@ -103,7 +103,7 @@ public class Simulator {
      * (4000 steps).
      */
     public void runLongSimulation() {
-        simulate(4000);
+        simulate(80000);
     }
 
     /**
@@ -116,7 +116,7 @@ public class Simulator {
     public void simulate(int numSteps) {
         for (int step = 1; step <= numSteps && views.get(0).isViable(field); step++) {
             try {
-                TimeUnit.MILLISECONDS.sleep(100);
+                TimeUnit.MILLISECONDS.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -135,8 +135,6 @@ public class Simulator {
             being.act();
             if (being.isAlive()) {
                 livingBeings.set(i, being);
-            } else {
-                livingBeings.remove(i);
             }
         }
         updateViews();

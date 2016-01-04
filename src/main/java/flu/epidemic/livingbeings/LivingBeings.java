@@ -1,8 +1,9 @@
 package flu.epidemic.livingbeings;
 
 import flu.epidemic.simulator.Field;
+
 import flu.epidemic.simulator.Location;
-import flu.epidemic.states.State;
+import flu.epidemic.States.State;
 import flu.epidemic.virus.Virus;
 
 import java.util.List;
@@ -41,8 +42,8 @@ public abstract class LivingBeings {
     public boolean isAlive()
     {
         if (state.equals(State.DEAD))
-            return false;
-        return true;
+            return true;
+        return false;
     }
 
     /**
