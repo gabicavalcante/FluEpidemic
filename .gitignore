@@ -1,5 +1,7 @@
 # Created by https://www.gitignore.io/api/eclipse,intellij,sublimetext,xcode,osx,linux
 
+target/
+
 ### Eclipse ###
 *.pydevproject
 .metadata

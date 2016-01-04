@@ -1,4 +1,4 @@
-package flu.epidemic.Enum;
+package flu.epidemic.States;
 
 /**
  * Enum to represents the STATUS of a person.
@@ -7,7 +7,7 @@ package flu.epidemic.Enum;
  * @version 1.0
  * @created 03/12/2015
  */
-public enum Status {
+public enum State {
     HEALTHY("healthy"),
     SICK("sick"), //infected
     CONTAGIUS("contagious"),
@@ -15,13 +15,13 @@ public enum Status {
     DEAD("dead");
 
     private String status = "";
-   // private Status previousStatus = "helthy";
+   // private State previousStatus = "helthy";
 
     /**
      * Constructor enum
      * @param status
      */
-    Status(String status) {
+    State(String status) {
         this.status = status;
         //this.previousStatus = previousStatus;
     }
@@ -34,16 +34,16 @@ public enum Status {
         return status;
     }
 
-    public boolean isEquals(Status status) { return this.status.equalsIgnoreCase(status.toString()); }
+    public boolean isEquals(State state) { return this.status.equalsIgnoreCase(state.toString()); }
 
     /**
-     * Method that receive a status as string and return the object Status
+     * Method that receive a status as string and return the object State
      * @param status string with the status
-     * @return object Status
+     * @return object State
      */
-    public static Status fromString(String status){
+    public static State fromString(String status){
         if (status != null){
-            for (Status d : Status.values()){
+            for (State d : State.values()){
                 if (d.toString().equalsIgnoreCase(status)) return d;
             }
         }

@@ -1,7 +1,6 @@
-package flu.epidemic;
+package flu.epidemic.livingbeings.animals;
 
 import flu.epidemic.Enum.Being;
-import flu.epidemic.livingbeings.Bird;
 
 /**
  * @author Raquel Oliveira, Gabriela Cavalcante

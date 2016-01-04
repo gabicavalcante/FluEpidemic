@@ -1,4 +1,4 @@
-package flu.epidemic.Enum;
+package flu.epidemic.livingbeings;
 
 /**
  * @author Raquel Oliveira

@@ -1,4 +1,4 @@
-package flu.epidemic.livingbeings;
+package flu.epidemic.livingbeings.animals;
 
 import flu.epidemic.Enum.Being;
 

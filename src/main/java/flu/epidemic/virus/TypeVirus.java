@@ -1,7 +1,7 @@
-package flu.epidemic.Enum;
+package flu.epidemic.virus;
 
 /**
- * Enum to represents the STATUS of a person.
+ * util to represents the STATUS of a person.
  *
  * @author Raquel Lopes de Oliveira
  * @version 1.0
