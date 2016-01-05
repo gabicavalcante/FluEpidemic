@@ -10,8 +10,6 @@ import flu.epidemic.simulator.Location;
  * @version 07/12/2015.
  */
 public class Duck extends Bird {
-    private Being type;
-
     public Duck(Field field, Location location){
         super(Being.DUCK, field, location);
     }

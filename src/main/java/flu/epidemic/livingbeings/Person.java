@@ -15,7 +15,6 @@ import flu.epidemic.simulator.Location;
 public class Person extends LivingBeings {
 
     private static final double VACCINATED_RATE = 0.02;
-    private static final double CONTAGIOUS = 2;
 
     // manager of the state
     StatesManager statesManager;
@@ -26,13 +25,13 @@ public class Person extends LivingBeings {
     // after contagious, the time of contagious is increment
     private int timeRecover;
 
-    private int moveSlow;
+    private int moveSlowly;
 
     public Person(Field field, Location location) {
         super(Being.PERSON, field, location);
         this.statesManager = new StatesManagerPerson(field, location);
         this.timeInfection = 0;
-        moveSlow = 0;
+        moveSlowly = 0;
     }
 
     @Override
@@ -43,26 +42,35 @@ public class Person extends LivingBeings {
             this.state = statesManager.getState(virus, timeInfection, timeContagious, timeRecover);
 
             if (state.isEquals(StateType.HEALTHY)) {
+                resetTime();
+
                 Location newLocation = getField().freeAdjacentLocation(getLocation());
 
                 if (newLocation != null)
                     setLocation(newLocation);
 
             } else if  (state.isEquals(StateType.SICK) || state.isEquals(StateType.CONTAGIOUS)) {
-                if ((moveSlow % 20) == 0) {
+                if ((moveSlowly % 20) == 0) {
                     Location newLocation = getField().freeAdjacentLocation(getLocation());
 
                     if (newLocation != null)
                         setLocation(newLocation);
                 }
-                moveSlow++;
+                moveSlowly++;
             } else if (state.isEquals(StateType.DEAD)) {
                 setDead();
             }
         }
     }
 
-    private void updateTime() {
+    private void resetTime() {
+        timeContagious = 0;
+        timeInfection = 0;
+        timeRecover = 0;
+    }
+
+    @Override
+    protected void updateTime() {
         if (state.isEquals(StateType.SICK)) {
             virus = statesManager.getCurrentVirus();
             timeInfection++;

@@ -23,9 +23,9 @@ import java.util.concurrent.TimeUnit;
 public class Simulator {
     // Constants representing configuration information for the simulation.
     // The default width for the grid.
-    private static final int DEFAULT_WIDTH = 25;
+    private static final int DEFAULT_WIDTH = 60;
     // The default depth of the grid.
-    private static final int DEFAULT_DEPTH = 25;
+    private static final int DEFAULT_DEPTH = 60;
     // The probability that a person will be created in any given grid position.
     private static final double PERSON_CREATION_PROBABILITY = 0.08;
     // The probability that a animal will be created in any given grid position.
@@ -115,7 +115,7 @@ public class Simulator {
     public void simulate() {
         for (step = 1; views.get(0).isViable(field) && canContinuos(); step++) {
             try {
-                TimeUnit.MILLISECONDS.sleep(100);
+                TimeUnit.MILLISECONDS.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

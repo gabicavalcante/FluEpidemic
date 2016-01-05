@@ -27,9 +27,8 @@ public abstract class StatesManager {
     public abstract StateType getState(Virus virus, int timeInfection, int timeContagious, int timeRecover);
 
     StateType analyseStateSick(Virus virus, int timeInfection) {
-        if (timeInfection == virus.getIncubationTime()) {
+        if (timeInfection == virus.getIncubationTime())
             return StateType.CONTAGIOUS;
-        }
         return StateType.SICK;
     }
 

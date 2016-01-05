@@ -42,9 +42,7 @@ public abstract class LivingBeings {
      */
     public boolean isAlive()
     {
-        if (state.equals(StateType.DEAD))
-            return false;
-        return true;
+        return alive;
     }
 
     /**
@@ -115,4 +113,7 @@ public abstract class LivingBeings {
     public Being getType() {
 		return type;
 	}
+
+
+    abstract protected void updateTime();
 }

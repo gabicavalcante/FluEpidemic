@@ -23,12 +23,6 @@ public class StatesManagerAnimal extends StatesManager {
         this.animalType = animal;
     }
 
-    public StatesManagerAnimal(Being animal, StateType state, Field field, Location location) {
-        super(field, location);
-        this.currentState = state;
-        this.animalType = animal;
-    }
-
     @Override
     public StateType getState(Virus virus, int timeInfection, int timeContagious) {
         if (currentState.isEquals(StateType.HEALTHY)) {
@@ -48,7 +42,7 @@ public class StatesManagerAnimal extends StatesManager {
 
     @Override
     StateType analyseStateContagious(Virus virus, int timeContagious) {
-        if (timeContagious == virus.getContagiousTime()) 
+        if (timeContagious == virus.getContagiousTime())
             return StateType.DEAD;
         return StateType.CONTAGIOUS;
     }

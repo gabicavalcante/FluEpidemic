@@ -33,7 +33,7 @@ public class StatesManagerPerson extends StatesManager {
     }
 
     private StateType analyseStateRecover(Virus virus, int timeRecover) {
-        if (timeRecover == virus.getIncubationTime())
+        if (timeRecover == virus.getRecoverTime())
             return StateType.HEALTHY;
         return StateType.RECOVERING;
     }
