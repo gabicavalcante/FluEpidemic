@@ -41,7 +41,7 @@ public class Person extends LivingBeings {
         this.timeInfection = 0;
         moveSlowly = 0;
         isVaccinated = false;
-        isResistant = isVaccinated;
+        isResistant = false;
 
         Random random = new Random();
         this.healthyPerson = random.nextBoolean();
@@ -101,6 +101,10 @@ public class Person extends LivingBeings {
             timeRecover++;
     }
 
+    /**
+     * Inform if someone is resistant to the virus
+     * @return true if the person is resistant by default or was vaccinated against the virus.
+     */
     @Override
     public boolean isResistant() {
         return isResistant;

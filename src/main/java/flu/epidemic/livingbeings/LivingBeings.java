@@ -9,7 +9,8 @@ import flu.epidemic.virus.Virus;
 /**
  * @author David J. Barnes and Michael Kölling
  * @author Gabriela Cavalcante
- * @version 03/12/15.
+ * @author Raquel Oliveira
+ * @version 05/01/16.
  */
 public abstract class LivingBeings {
     protected StateType state;
@@ -114,18 +115,11 @@ public abstract class LivingBeings {
 		return type;
 	}
 
-    /**
-     *
-     */
+
     abstract protected void updateTime();
 
-    /**
-     * Return if the being is resistance or not
-     * @return boolean to resistance
-     */
-    public boolean isResistant() {
-        return false;
-    }
+
+    abstract public boolean isResistant();
 
     /**
      * Set a boolean that says if this entity/being is resistant

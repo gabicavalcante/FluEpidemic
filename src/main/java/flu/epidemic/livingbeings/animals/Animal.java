@@ -74,4 +74,9 @@ public abstract class Animal extends LivingBeings {
         else if (state.isEquals(StateType.CONTAGIOUS))
             timeContagious++;
     }
+
+    @Override
+    public boolean isResistant() {
+        return false;
+    }
 }
