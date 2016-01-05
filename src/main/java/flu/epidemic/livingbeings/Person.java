@@ -30,6 +30,8 @@ public class Person extends LivingBeings {
     private int moveSlowly;
     // if the person was vaccinated
     private boolean isVaccinated;
+    // if the person was infected but recovered
+    private boolean resistance;
 
     public Person(Field field, Location location) {
         super(StateType.HEALTHY, Being.PERSON, field, location);
@@ -37,6 +39,7 @@ public class Person extends LivingBeings {
         this.timeInfection = 0;
         moveSlowly = 0;
         isVaccinated = false;
+        resistance = false;
     }
 
     @Override
@@ -44,7 +47,7 @@ public class Person extends LivingBeings {
         if (isAlive()) {
             updateTime();
 
-            if (!isVaccinated)
+            if (!isVaccinated && !resistance)
                 this.state = statesManager.getState(virus, timeInfection, timeContagious, timeRecover);
 
             if (state.isEquals(StateType.HEALTHY)) {
@@ -66,6 +69,8 @@ public class Person extends LivingBeings {
                         setLocation(newLocation);
                 }
                 moveSlowly++;
+            } else if (state.isEquals(StateType.RECOVERING)) {
+                resistance = true;
             } else if (state.isEquals(StateType.DEAD)) {
                 setDead();
             }
@@ -88,6 +93,16 @@ public class Person extends LivingBeings {
             timeContagious++;
         if (state.isEquals(StateType.RECOVERING))
             timeRecover++;
+    }
+
+    @Override
+    public boolean isResistance() {
+        return resistance;
+    }
+
+    @Override
+    public void setResistance(boolean resistance) {
+        this.resistance = resistance;
     }
 }
 

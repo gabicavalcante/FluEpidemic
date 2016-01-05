@@ -116,4 +116,11 @@ public abstract class LivingBeings {
 
 
     abstract protected void updateTime();
+
+    public boolean isResistance() {
+        return false;
+    }
+
+    public void setResistance(boolean resistance) {
+    }
 }

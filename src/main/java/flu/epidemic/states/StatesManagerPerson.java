@@ -67,10 +67,14 @@ public class StatesManagerPerson extends StatesManager {
         for (Location loc : field.adjacentLocations(location)) {
             LivingBeings beings = (LivingBeings) field.getObjectAt(loc);
             Random rand = Randomizer.getRandom();
-            if (beings != null && beings.getState().isEquals(StateType.CONTAGIOUS)) {
-                if(rand.nextDouble() <= beings.getVirus().getInfectionRate()){
-                	currentVirus = beings.getVirus();
-                    return StateType.SICK;
+            if (beings != null) {
+                if (beings.getState().isEquals(StateType.CONTAGIOUS)) {
+                    if(rand.nextDouble() <= beings.getVirus().getInfectionRate()){
+                        currentVirus = beings.getVirus();
+                        return StateType.SICK;
+                    }
+                } else if (beings.isResistance()) {
+                    return StateType.RECOVERING;
                 }
             }
         }
