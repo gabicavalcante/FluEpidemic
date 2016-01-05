@@ -24,7 +24,7 @@ public abstract class LivingBeings {
     public LivingBeings(Being type, Field field, Location location) {
         this.type = type;
         this.virus = null;
-        alive = true;
+        this.alive = true;
         this.field = field;
         this.state = StateType.HEALTHY;
         setLocation(location);
@@ -43,8 +43,8 @@ public abstract class LivingBeings {
     public boolean isAlive()
     {
         if (state.equals(StateType.DEAD))
-            return true;
-        return false;
+            return false;
+        return true;
     }
 
     /**

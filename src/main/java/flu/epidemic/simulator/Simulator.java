@@ -4,6 +4,7 @@ import flu.epidemic.exceptions.DimensionNegativeException;
 import flu.epidemic.livingbeings.animals.*;
 import flu.epidemic.livingbeings.Person;
 import flu.epidemic.livingbeings.LivingBeings;
+import flu.epidemic.states.StateType;
 
 import java.util.Iterator;
 import java.util.Random;
@@ -103,20 +104,18 @@ public class Simulator {
      * (4000 steps).
      */
     public void runLongSimulation() {
-        simulate(80000);
+        simulate();
     }
 
     /**
      * Run the simulation from its current state for the given number of steps.
      * Stop before the given number of steps if it ceases to be viable.
-     * 
-     * @param numSteps
-     *            The number of steps to run for.
+     *
      */
-    public void simulate(int numSteps) {
-        for (int step = 1; step <= numSteps && views.get(0).isViable(field); step++) {
+    public void simulate() {
+        for (step = 1; views.get(0).isViable(field) && canContinuos(); step++) {
             try {
-                TimeUnit.MILLISECONDS.sleep(10);
+                TimeUnit.MILLISECONDS.sleep(5);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -135,7 +134,7 @@ public class Simulator {
             being.act();
             if (being.isAlive()) {
                 livingBeings.set(i, being);
-            } 
+            }
         }
         updateViews();
     }
@@ -189,5 +188,19 @@ public class Simulator {
                 }
             }
         }
+    }
+
+    public boolean canContinuos() {
+        boolean allHealthy = true;
+        boolean allDead = true;
+        for (LivingBeings being: livingBeings) {
+            if (being.getState() != StateType.HEALTHY)
+                allHealthy = false;
+            if (being.getState() != StateType.DEAD)
+                allDead = false;
+        }
+        if (allDead || allHealthy)
+            return false;
+        return true;
     }
 }

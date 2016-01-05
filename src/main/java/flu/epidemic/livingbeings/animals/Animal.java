@@ -24,8 +24,6 @@ import java.util.Random;
  * @version 07/12/2015
  */
 public abstract class Animal extends LivingBeings {
-    // Whether the animal is alive or not.
-    private boolean alive;
     // The animal's position in the field.
     private Location location;
     // after infected, the time of infection is increment
