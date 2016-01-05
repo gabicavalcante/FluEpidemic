@@ -116,7 +116,7 @@ public class Simulator {
      *
      */
     public void simulate() {
-        for (step = 1; views.get(0).isViable(field) && canContinuos(); step++) {
+        for (step = 1; views.get(0).isViable(field) && canContinue(); step++) {
             try {
                 TimeUnit.MILLISECONDS.sleep(speed);
             } catch (InterruptedException e) {
@@ -193,7 +193,7 @@ public class Simulator {
         }
     }
 
-    public boolean canContinuos() {
+    public boolean canContinue() {
         boolean allHealthy = true;
         boolean allDead = true;
         for (LivingBeings being: livingBeings) {
