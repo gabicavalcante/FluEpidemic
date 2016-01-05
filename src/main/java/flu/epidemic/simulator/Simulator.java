@@ -196,7 +196,7 @@ public class Simulator {
     public boolean canContinue() {
         boolean stop = true;
         for (LivingBeings being: livingBeings) {
-            if (being.getState() != StateType.DEAD && being.getState() != StateType.HEALTHY) {
+            if ((being.getState() != StateType.DEAD) && (being.getState() != StateType.HEALTHY)) {
                 stop = false;
             }
         }
