@@ -14,8 +14,8 @@ import java.util.Random;
  */
 public class StatesManagerPerson extends StatesManager {
 
-    public StatesManagerPerson(Field field, Location location) {
-        super(field, location);
+    public StatesManagerPerson(StateType stateType, Field field, Location location) {
+        super(stateType, field, location);
     }
 
     @Override
@@ -30,6 +30,13 @@ public class StatesManagerPerson extends StatesManager {
             currentState = analyseStateRecover(virus, timeRecover);
         }
         return currentState;
+    }
+
+    @Override
+    public StateType analyseStateSick(Virus virus, int timeInfection) {
+        if (timeInfection >= virus.getIncubationTime())
+            return StateType.CONTAGIOUS;
+        return StateType.SICK;
     }
 
     private StateType analyseStateRecover(Virus virus, int timeRecover) {

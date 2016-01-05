@@ -37,12 +37,15 @@ public abstract class Animal extends LivingBeings {
      */
     public Animal(Being being, Field field, Location location)
     {
-        super(being, field, location);
-        this.field = field;
-        this.statesManager = new StatesManagerAnimal(being, field, location);
+        super(StateType.SICK, being, field, location);
+
         // some animals already being sick with their specific virus
         Random rand = Randomizer.getRandom();
-        if (rand.nextBoolean()) this.state = StateType.CONTAGIOUS;
+        if (rand.nextBoolean()) this.state = StateType.SICK;
+        else this.state = StateType.HEALTHY;
+
+        this.field = field;
+        this.statesManager = new StatesManagerAnimal(this.state, being, field, location);
     }
 
     /**
@@ -66,11 +69,9 @@ public abstract class Animal extends LivingBeings {
      */
     @Override
     protected void updateTime() {
-        if (state.isEquals(StateType.SICK)) {
-            virus = statesManager.getCurrentVirus();
+        if (state.isEquals(StateType.SICK))
             timeInfection++;
-        }
-        if (state.isEquals(StateType.CONTAGIOUS))
+        else if (state.isEquals(StateType.CONTAGIOUS))
             timeContagious++;
     }
 }

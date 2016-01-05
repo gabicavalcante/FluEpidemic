@@ -7,6 +7,8 @@ import flu.epidemic.simulator.Field;
 
 import flu.epidemic.simulator.Location;
 
+import java.util.Random;
+
 /**
  * @author Huang Xiaohan
  * @author Gabriela Cavalcante
@@ -14,7 +16,7 @@ import flu.epidemic.simulator.Location;
  */
 public class Person extends LivingBeings {
 
-    private static final double VACCINATED_RATE = 0.02;
+    private static final double VACCINATED_RATE = 0.2;
 
     // manager of the state
     StatesManager statesManager;
@@ -24,14 +26,17 @@ public class Person extends LivingBeings {
     private int timeContagious;
     // after contagious, the time of contagious is increment
     private int timeRecover;
-
+    // if the person is sick or contagious, she will move slowly
     private int moveSlowly;
+    // if the person was vaccinated
+    private boolean isVaccinated;
 
     public Person(Field field, Location location) {
-        super(Being.PERSON, field, location);
-        this.statesManager = new StatesManagerPerson(field, location);
+        super(StateType.HEALTHY, Being.PERSON, field, location);
+        this.statesManager = new StatesManagerPerson(StateType.HEALTHY, field, location);
         this.timeInfection = 0;
         moveSlowly = 0;
+        isVaccinated = false;
     }
 
     @Override
@@ -39,7 +44,8 @@ public class Person extends LivingBeings {
         if (isAlive()) {
             updateTime();
 
-            this.state = statesManager.getState(virus, timeInfection, timeContagious, timeRecover);
+            if (!isVaccinated)
+                this.state = statesManager.getState(virus, timeInfection, timeContagious, timeRecover);
 
             if (state.isEquals(StateType.HEALTHY)) {
                 resetTime();
@@ -48,6 +54,9 @@ public class Person extends LivingBeings {
 
                 if (newLocation != null)
                     setLocation(newLocation);
+
+                Random random = new Random();
+                if (random.nextDouble() <= VACCINATED_RATE) isVaccinated = true;
 
             } else if  (state.isEquals(StateType.SICK) || state.isEquals(StateType.CONTAGIOUS)) {
                 if ((moveSlowly % 20) == 0) {

@@ -18,8 +18,8 @@ import flu.epidemic.virus.Virus;
 public class StatesManagerAnimal extends StatesManager {
     private Being animalType;
 
-    public StatesManagerAnimal(Being animal, Field field, Location location) {
-        super(field, location);
+    public StatesManagerAnimal(StateType stateType, Being animal, Field field, Location location) {
+        super(stateType, field, location);
         this.animalType = animal;
     }
 
@@ -38,6 +38,13 @@ public class StatesManagerAnimal extends StatesManager {
     @Override
     public StateType getState(Virus virus, int timeInfection, int timeContagious, int timeRecover) {
         return null;
+    }
+
+    @Override
+    public StateType analyseStateSick(Virus virus, int timeInfection) {
+        if (timeInfection >= virus.getIncubationTime())
+            return StateType.CONTAGIOUS;
+        return StateType.SICK;
     }
 
     @Override

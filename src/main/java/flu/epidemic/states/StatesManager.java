@@ -14,8 +14,8 @@ public abstract class StatesManager {
     protected Location location;
     protected Virus currentVirus;
 
-    protected StatesManager(Field field, Location location) {
-        currentState = StateType.HEALTHY;
+    protected StatesManager(StateType stateType, Field field, Location location) {
+        currentState = stateType;
         this.field = field;
         this.location = location;
     }
@@ -26,11 +26,7 @@ public abstract class StatesManager {
 
     public abstract StateType getState(Virus virus, int timeInfection, int timeContagious, int timeRecover);
 
-    StateType analyseStateSick(Virus virus, int timeInfection) {
-        if (timeInfection == virus.getIncubationTime())
-            return StateType.CONTAGIOUS;
-        return StateType.SICK;
-    }
+    public abstract StateType analyseStateSick(Virus virus, int timeInfection);
 
     abstract StateType analyseStateHealthy();
 

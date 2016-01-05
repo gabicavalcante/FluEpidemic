@@ -6,7 +6,6 @@ import flu.epidemic.livingbeings.Person;
 import flu.epidemic.livingbeings.LivingBeings;
 import flu.epidemic.states.StateType;
 
-import java.util.Iterator;
 import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
@@ -42,6 +41,8 @@ public class Simulator {
     private int step;
     // A graphical view of the simulation.
     private List<SimulatorView> views;
+    // speed
+    private int speed;
 
     /**
      * Construct a simulation field with default size.
@@ -69,6 +70,7 @@ public class Simulator {
             width = DEFAULT_WIDTH;
         }
 
+        speed = 100;
         livingBeings = new ArrayList<>();
         field = new Field(depth, width);
 
@@ -81,7 +83,8 @@ public class Simulator {
         view.setColor(Duck.class, Color.ORANGE);
         views.add(view);
 
-        // startGraphView(view);
+        startGraphView(view);
+
         // Setup a valid starting point.
         reset();
     }
@@ -115,7 +118,7 @@ public class Simulator {
     public void simulate() {
         for (step = 1; views.get(0).isViable(field) && canContinuos(); step++) {
             try {
-                TimeUnit.MILLISECONDS.sleep(10);
+                TimeUnit.MILLISECONDS.sleep(speed);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

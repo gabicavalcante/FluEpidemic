@@ -21,12 +21,12 @@ public abstract class LivingBeings {
     protected Field field;
     protected boolean alive;
 
-    public LivingBeings(Being type, Field field, Location location) {
+    public LivingBeings(StateType state, Being type, Field field, Location location) {
         this.type = type;
         this.virus = null;
         this.alive = true;
         this.field = field;
-        this.state = StateType.HEALTHY;
+        this.state = state;
         setLocation(location);
     }
 
