@@ -19,13 +19,18 @@ public class StatesManagerPerson extends StatesManager {
     }
 
     @Override
-    public StateType getState(Virus virus, int timeInfection, int timeContagious, int timeRecover) {
+    StateType analyseStateContagious(Virus virus, int timeContagious) {
+        return null;
+    }
+
+    @Override
+    public StateType getState(boolean healthyPerson, Virus virus, int timeInfection, int timeContagious, int timeRecover) {
         if (currentState.isEquals(StateType.HEALTHY)) {
             currentState = analyseStateHealthy();
         } else if (currentState.isEquals(StateType.SICK)) {
             currentState = analyseStateSick(virus, timeInfection);
         } else if (currentState.isEquals(StateType.CONTAGIOUS)) {
-            currentState = analyseStateContagious(virus, timeContagious);
+            currentState = analyseStateContagious(healthyPerson, virus, timeContagious);
         } else if (currentState.isEquals(StateType.RECOVERING)) {
             currentState = analyseStateRecover(virus, timeRecover);
         }
@@ -46,10 +51,10 @@ public class StatesManagerPerson extends StatesManager {
     }
 
     @Override
-    StateType analyseStateContagious(Virus virus, int timeContagious) {
+    StateType analyseStateContagious(boolean healthyPerson, Virus virus, int timeContagious) {
         Random rand = Randomizer.getRandom();
         if (timeContagious == virus.getContagiousTime()) {
-            if (rand.nextDouble() <= virus.getMortalityRate())
+            if (rand.nextDouble() <= virus.getMortalityRate() && !healthyPerson)
                 return StateType.DEAD;
             else
                 return StateType.RECOVERING;

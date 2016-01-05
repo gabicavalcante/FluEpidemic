@@ -22,9 +22,11 @@ public abstract class StatesManager {
 
     abstract StateType analyseStateContagious(Virus virus, int timeContagious);
 
+    abstract StateType analyseStateContagious(boolean healthyPerson, Virus virus, int timeContagious);
+
     public abstract StateType getState(Virus virus, int timeInfection, int timeContagious);
 
-    public abstract StateType getState(Virus virus, int timeInfection, int timeContagious, int timeRecover);
+    public abstract StateType getState(boolean healthyPerson, Virus virus, int timeInfection, int timeContagious, int timeRecover);
 
     public abstract StateType analyseStateSick(Virus virus, int timeInfection);
 

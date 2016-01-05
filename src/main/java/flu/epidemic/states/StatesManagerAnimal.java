@@ -36,7 +36,7 @@ public class StatesManagerAnimal extends StatesManager {
     }
 
     @Override
-    public StateType getState(Virus virus, int timeInfection, int timeContagious, int timeRecover) {
+    public StateType getState(boolean healthyPerson, Virus virus, int timeInfection, int timeContagious, int timeRecover) {
         return null;
     }
 
@@ -52,6 +52,11 @@ public class StatesManagerAnimal extends StatesManager {
         if (timeContagious == virus.getContagiousTime())
             return StateType.DEAD;
         return StateType.CONTAGIOUS;
+    }
+
+    @Override
+    StateType analyseStateContagious(boolean healthyPerson, Virus virus, int timeContagious) {
+        return null;
     }
 
     @Override
