@@ -22,9 +22,9 @@ import java.util.concurrent.TimeUnit;
 public class Simulator {
     // Constants representing configuration information for the simulation.
     // The default width for the grid.
-    private static final int DEFAULT_WIDTH = 60;
+    private static final int DEFAULT_WIDTH = 9;
     // The default depth of the grid.
-    private static final int DEFAULT_DEPTH = 60;
+    private static final int DEFAULT_DEPTH = 9;
     // The probability that a person will be created in any given grid position.
     private static final double PERSON_CREATION_PROBABILITY = 0.08;
     // The probability that a animal will be created in any given grid position.
@@ -116,7 +116,7 @@ public class Simulator {
      *
      */
     public void simulate() {
-        for (step = 1; views.get(0).isViable(field) && canContinuos(); step++) {
+        for (step = 1; views.get(0).isViable(field) && canContinuous(); step++) {
             try {
                 TimeUnit.MILLISECONDS.sleep(speed);
             } catch (InterruptedException e) {
@@ -193,17 +193,14 @@ public class Simulator {
         }
     }
 
-    public boolean canContinuos() {
-        boolean allHealthy = true;
-        boolean allDead = true;
+    public boolean canContinuous() {
+        boolean stop = true;
         for (LivingBeings being: livingBeings) {
-            if (being.getState() != StateType.DEAD) {
-                allDead = false;
-                if (being.getState() != StateType.HEALTHY)
-                    allHealthy = false;
+            if (being.getState() != StateType.DEAD && being.getState() != StateType.HEALTHY) {
+                stop = false;
             }
         }
-        if (allDead || allHealthy || (!allDead && allHealthy))
+        if (stop)
             return false;
         return true;
     }
