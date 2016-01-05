@@ -29,13 +29,13 @@ As we made everything collaborative we decided to use Git. You can find the proj
 ## How to Compile ##
 
 You can compile using the command:
-```javac -d ```
+```javac -d build/classes/ -cp build/classes src/main/java/flu/epidemic/*.java src/main/java/flu/epidemic/exceptions/*.java src/main/java/flu/idemic/livingbeings/*.java src/main/java/flu/epidemic/livingbeings/animals/*.java src/main/java/flu/epidemic/simulator/*.java src/main/java/flu/epidemic/states/*.java src/main/java/flu/epidemic/virus/*.java```
 
 
 ## How to Run ##
 
 You can run with 
-```java -cp```
+```java -cp build/classes/ flu.epidemic.Main```
 
 ## Maintainers ##
 
