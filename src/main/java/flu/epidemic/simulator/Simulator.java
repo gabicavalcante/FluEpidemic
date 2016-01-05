@@ -70,7 +70,7 @@ public class Simulator {
             width = DEFAULT_WIDTH;
         }
 
-        speed = 100;
+        speed = 10;
         livingBeings = new ArrayList<>();
         field = new Field(depth, width);
 
@@ -197,12 +197,13 @@ public class Simulator {
         boolean allHealthy = true;
         boolean allDead = true;
         for (LivingBeings being: livingBeings) {
-            if (being.getState() != StateType.HEALTHY)
-                allHealthy = false;
-            if (being.getState() != StateType.DEAD)
+            if (being.getState() != StateType.DEAD) {
                 allDead = false;
+                if (being.getState() != StateType.HEALTHY)
+                    allHealthy = false;
+            }
         }
-        if (allDead || allHealthy)
+        if (allDead || allHealthy || (!allDead && allHealthy))
             return false;
         return true;
     }
