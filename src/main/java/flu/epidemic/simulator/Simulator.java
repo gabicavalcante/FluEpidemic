@@ -115,7 +115,7 @@ public class Simulator {
     public void simulate() {
         for (step = 1; views.get(0).isViable(field) && canContinuos(); step++) {
             try {
-                TimeUnit.MILLISECONDS.sleep(1000);
+                TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

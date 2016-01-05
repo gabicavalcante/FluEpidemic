@@ -105,12 +105,14 @@ public abstract class Animal extends LivingBeings {
 
     @Override
     public void act() {
-        updateTime();
+        if (isAlive()) {
+            updateTime();
 
-        this.state = statesManager.getState(virus, timeInfection, timeContagious);
+            this.state = statesManager.getState(virus, timeInfection, timeContagious);
 
-        if (state.isEquals(StateType.DEAD)) {
-            setDead();
+            if (state.isEquals(StateType.DEAD)) {
+                setDead();
+            }
         }
     }
 

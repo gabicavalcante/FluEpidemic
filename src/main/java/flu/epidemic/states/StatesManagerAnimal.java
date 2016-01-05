@@ -57,9 +57,8 @@ public class StatesManagerAnimal extends StatesManager {
     StateType analyseStateHealthy() {
         for (Location loc : field.adjacentLocations(location)) {
             LivingBeings beings = (LivingBeings) field.getObjectAt(loc);
-            if (beings == null) return StateType.HEALTHY;
             Random rand = Randomizer.getRandom();
-            if (beings.getState().isEquals(StateType.CONTAGIOUS) && rand.nextDouble() <= beings.getVirus().getInfectionRate()) {
+            if (beings != null && beings.getState().isEquals(StateType.CONTAGIOUS) && rand.nextDouble() <= beings.getVirus().getInfectionRate()) {
             	if (animalType.isEquals(beings.getType())){
                     currentVirus = beings.getVirus();
                     return StateType.SICK;

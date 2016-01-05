@@ -26,26 +26,39 @@ public class Person extends LivingBeings {
     // after contagious, the time of contagious is increment
     private int timeRecover;
 
+    private int moveSlow;
+
     public Person(Field field, Location location) {
         super(Being.PERSON, field, location);
         this.statesManager = new StatesManagerPerson(field, location);
         this.timeInfection = 0;
+        moveSlow = 0;
     }
 
     @Override
     public void act() {
-        updateTime();
+        if (isAlive()) {
+            updateTime();
 
-        this.state = statesManager.getState(virus, timeInfection, timeContagious, timeRecover);
+            this.state = statesManager.getState(virus, timeInfection, timeContagious, timeRecover);
 
-        if(state.isEquals(StateType.HEALTHY)) {
-            Location newLocation = getField().freeAdjacentLocation(getLocation());
+            if (state.isEquals(StateType.HEALTHY)) {
+                Location newLocation = getField().freeAdjacentLocation(getLocation());
 
-            if (newLocation != null)
-                setLocation(newLocation);
+                if (newLocation != null)
+                    setLocation(newLocation);
 
-        } else if (state.isEquals(StateType.DEAD)) {
-            setDead();
+            } else if  (state.isEquals(StateType.SICK) || state.isEquals(StateType.CONTAGIOUS)) {
+                if ((moveSlow % 20) == 0) {
+                    Location newLocation = getField().freeAdjacentLocation(getLocation());
+
+                    if (newLocation != null)
+                        setLocation(newLocation);
+                }
+                moveSlow++;
+            } else if (state.isEquals(StateType.DEAD)) {
+                setDead();
+            }
         }
     }
 
