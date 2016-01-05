@@ -13,9 +13,4 @@ public class Duck extends Bird {
     public Duck(Field field, Location location){
         super(Being.DUCK, field, location);
     }
-
-    @Override
-    public void act() {
-        super.act();
-    }
 }

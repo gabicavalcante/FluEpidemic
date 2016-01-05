@@ -17,9 +17,4 @@ public class Bird extends Animal {
         super(being, field, location);
         this.virus = new H5N1();
     }
-
-    @Override
-    public void act() {
-        super.act();
-    }
 }

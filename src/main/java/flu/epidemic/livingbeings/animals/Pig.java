@@ -16,9 +16,4 @@ public class Pig extends Animal {
         this.type = Being.PIG;
         this.virus = new H1N1();
     }
-
-    @Override
-    public void act() {
-        super.act();
-    }
 }
