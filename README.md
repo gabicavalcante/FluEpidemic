@@ -10,14 +10,16 @@ Final project of semester 5 to the subject 'Introduction to Object Oriented Prog
 ## Informations ##
 
 It was used some tool/framwork to develop this project as:
-* Astah: to make the class diagram
-* LaTeX: to write the repport about the project
+* Astah: to make the class diagram;
+* LaTeX: to write the repport about the project;
 * Maven: to run packages and libraries;
 * JUnit: to make tests;
 * Sonar: to analyze the code;
+
 If you want to use these tools (free) you can find the maven in https://maven.apache.org
 the JUnit in http://junit.org and the Sonar in http://www.sonarqube.org .
 Also you can use the free licence for 50 days of Astah in http://astah.net . And if you want to write in LaTeX collaborative you can use the website sharelatex.com or https://www.overleaf.com
+
 As we made everything collaborative we decided to use Git. You can find the project in github by the link: http://migre.me/sCi0s to make comments or questions.
 
 ## Requirements ##
@@ -26,7 +28,14 @@ As we made everything collaborative we decided to use Git. You can find the proj
 
 ## How to Compile ##
 
+You can compile using the command:
+```javac -d ```
+
+
 ## How to Run ##
+
+You can run with 
+```java -cp```
 
 ## Maintainers ##
 
