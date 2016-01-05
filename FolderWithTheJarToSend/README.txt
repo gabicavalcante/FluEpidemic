@@ -36,7 +36,6 @@ You can compile using the command:
 
 You can run with 
 ```java -cp build/classes/ flu.epidemic.Main```
-
 ## Maintainers ##
 
 * Gabriela CAVALCANTE DA SILVA (gabicavalcantesilva@gmail.com)
