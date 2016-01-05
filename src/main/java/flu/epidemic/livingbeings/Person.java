@@ -55,16 +55,19 @@ public class Person extends LivingBeings {
             if (!isVaccinated && !resistance)
                 this.state = statesManager.getState(healthyPerson, virus, timeInfection, timeContagious, timeRecover);
 
-            if (state.isEquals(StateType.HEALTHY)) {
-                resetTime();
-
+            if ((state.isEquals(StateType.HEALTHY) || state.isEquals(StateType.RECOVERING))) {
                 Location newLocation = getField().freeAdjacentLocation(getLocation());
 
                 if (newLocation != null)
                     setLocation(newLocation);
 
-                Random random = new Random();
-                if (random.nextDouble() <= VACCINATED_RATE) isVaccinated = true;
+                if (state.isEquals(StateType.HEALTHY)) {
+                    resetTime();
+                    Random random = new Random();
+                    if (random.nextDouble() <= VACCINATED_RATE) isVaccinated = true;
+                } else {
+                    resistance = true;
+                }
 
             } else if  (state.isEquals(StateType.SICK) || state.isEquals(StateType.CONTAGIOUS)) {
                 if ((moveSlowly % 20) == 0) {
@@ -74,8 +77,6 @@ public class Person extends LivingBeings {
                         setLocation(newLocation);
                 }
                 moveSlowly++;
-            } else if (state.isEquals(StateType.RECOVERING)) {
-                resistance = true;
             } else if (state.isEquals(StateType.DEAD)) {
                 setDead();
             }
