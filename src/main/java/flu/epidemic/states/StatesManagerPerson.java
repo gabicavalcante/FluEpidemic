@@ -78,7 +78,7 @@ public class StatesManagerPerson extends StatesManager {
                         currentVirus = beings.getVirus();
                         return StateType.SICK;
                     }
-                } else if (beings.isResistance()) {
+                } else if (beings.isResistant()) {
                     return StateType.RECOVERING;
                 }
             }

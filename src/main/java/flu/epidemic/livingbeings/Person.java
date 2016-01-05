@@ -31,7 +31,7 @@ public class Person extends LivingBeings {
     // if the person was vaccinated
     private boolean isVaccinated;
     // if the person was infected but recovered
-    private boolean resistance;
+    private boolean isResistant;
     // healthy person
     private boolean healthyPerson;
 
@@ -41,7 +41,7 @@ public class Person extends LivingBeings {
         this.timeInfection = 0;
         moveSlowly = 0;
         isVaccinated = false;
-        resistance = false;
+        isResistant = isVaccinated;
 
         Random random = new Random();
         this.healthyPerson = random.nextBoolean();
@@ -52,7 +52,7 @@ public class Person extends LivingBeings {
         if (isAlive()) {
             updateTime();
 
-            if (!isVaccinated && !resistance)
+            if (!isVaccinated && !isResistant)
                 this.state = statesManager.getState(healthyPerson, virus, timeInfection, timeContagious, timeRecover);
 
             if ((state.isEquals(StateType.HEALTHY) || state.isEquals(StateType.RECOVERING))) {
@@ -66,7 +66,7 @@ public class Person extends LivingBeings {
                     Random random = new Random();
                     if (random.nextDouble() <= VACCINATED_RATE) isVaccinated = true;
                 } else {
-                    resistance = true;
+                    isResistant = true;
                 }
 
             } else if  (state.isEquals(StateType.SICK) || state.isEquals(StateType.CONTAGIOUS)) {
@@ -102,13 +102,13 @@ public class Person extends LivingBeings {
     }
 
     @Override
-    public boolean isResistance() {
-        return resistance;
+    public boolean isResistant() {
+        return isResistant;
     }
 
     @Override
-    public void setResistance(boolean resistance) {
-        this.resistance = resistance;
+    public void setResistance(boolean resistant) {
+        isResistant = resistant;
     }
 }
 

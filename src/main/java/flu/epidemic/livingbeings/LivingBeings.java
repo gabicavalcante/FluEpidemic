@@ -114,13 +114,23 @@ public abstract class LivingBeings {
 		return type;
 	}
 
-
+    /**
+     *
+     */
     abstract protected void updateTime();
 
-    public boolean isResistance() {
+    /**
+     * Return if the being is resistance or not
+     * @return boolean to resistance
+     */
+    public boolean isResistant() {
         return false;
     }
 
-    public void setResistance(boolean resistance) {
+    /**
+     * Set a boolean that says if this entity/being is resistant
+     * @param resistant
+     */
+    public void setResistance(boolean resistant) {
     }
 }
