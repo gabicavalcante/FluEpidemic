@@ -2,13 +2,9 @@ package flu.epidemic.livingbeings.animals;
 
 import flu.epidemic.livingbeings.Being;
 
-import flu.epidemic.livingbeings.LivingBeings;
 import flu.epidemic.simulator.Field;
 import flu.epidemic.simulator.Location;
-import flu.epidemic.states.State;
 import flu.epidemic.virus.H1N1;
-
-import java.util.List;
 
 /**
  * @author Raquel Oliveira, Gabriela Cavalcante
@@ -22,5 +18,7 @@ public class Pig extends Animal {
     }
 
     @Override
-    public void act() {}
+    public void act() {
+        super.act();
+    }
 }

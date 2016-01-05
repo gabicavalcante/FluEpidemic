@@ -12,71 +12,65 @@ import flu.epidemic.virus.Virus;
 
 /**
  * @author Huang Xiaohan
+ * @author Gabriela Cavalcante
  * @version 04/01/2015.
  */
-public abstract class StatesManagerAnimal {
-	private State currentState;
-    private Field field;
-    private Location location;
-    private Virus currentVirus;
-    private Animal animal;
+public class StatesManagerAnimal extends StatesManager {
+    private Being animalType;
 
-    public StatesManagerAnimal(Animal animal,Field field, Location location) {
-        currentState = State.HEALTHY;
-        this.field = field;
-        this.location = location;
+    public StatesManagerAnimal(Being animal, Field field, Location location) {
+        super(field, location);
+        this.animalType = animal;
     }
 
-    public StatesManagerAnimal(Animal animal,State state, Field field, Location location) {
+    public StatesManagerAnimal(Being animal, StateType state, Field field, Location location) {
+        super(field, location);
         this.currentState = state;
-        this.field = field;
-        this.location = location;
+        this.animalType = animal;
     }
 
-    public State getState(Virus virus, int timeInfection, int timeContagious) {
-        if (currentState.isEquals(State.HEALTHY)) {
-            return analyseStateHealthy();
-        } else if (currentState.isEquals(State.SICK)) {
-            return analyseStateSick(virus, timeInfection);
-        } else if (currentState.isEquals(State.CONTAGIUS)) {
-            return analyseStateContagious(virus, timeContagious);
+    @Override
+    public StateType getState(Virus virus, int timeInfection, int timeContagious) {
+        if (currentState.isEquals(StateType.HEALTHY)) {
+            currentState = analyseStateHealthy();
+        } else if (currentState.isEquals(StateType.SICK)) {
+            currentState = analyseStateSick(virus, timeInfection);
+        } else if (currentState.isEquals(StateType.CONTAGIOUS)) {
+            currentState = analyseStateContagious(virus, timeContagious);
         }
+        return currentState;
+    }
+
+    @Override
+    public StateType getState(Virus virus, int timeInfection, int timeContagious, int timeRecover) {
         return null;
     }
 
-
-    private State analyseStateContagious(Virus virus, int timeContagious) {
+    @Override
+    StateType analyseStateContagious(Virus virus, int timeContagious) {
         if (timeContagious == virus.getContagiousTime()) 
-            return State.DEAD;
-        else return State.CONTAGIUS;
+            return StateType.DEAD;
+        return StateType.CONTAGIOUS;
     }
 
-    private State analyseStateSick(Virus virus, int timeInfection) {
-        if (timeInfection == virus.getIncubationTime()) {
-            return State.CONTAGIUS;
-        }
-        return State.SICK;
-    }
-
-    private State analyseStateHealthy() {
+    @Override
+    StateType analyseStateHealthy() {
         for (Location loc : field.adjacentLocations(location)) {
             LivingBeings beings = (LivingBeings) field.getObjectAt(loc);
+            if (beings == null) return StateType.HEALTHY;
             Random rand = Randomizer.getRandom();
-            if (beings != null && beings.getState().isEquals(State.CONTAGIUS) && rand.nextDouble() <= beings.getVirus().getInfectionRate()) {
-            	if(animal.getType().isEquals(beings.getType())){
+            if (beings.getState().isEquals(StateType.CONTAGIOUS) && rand.nextDouble() <= beings.getVirus().getInfectionRate()) {
+            	if (animalType.isEquals(beings.getType())){
                     currentVirus = beings.getVirus();
-                    return State.SICK;
+                    return StateType.SICK;
             	}
-            	else if((animal.getType().isEquals(Being.DUCK) && beings.getType().isEquals(Being.CHICKEN)) || (animal.getType().isEquals(Being.CHICKEN) && beings.getType().isEquals(Being.DUCK))){
+            	else if((animalType.isEquals(Being.DUCK) && beings.getType().isEquals(Being.CHICKEN)) ||
+                        (animalType.isEquals(Being.CHICKEN) && beings.getType().isEquals(Being.DUCK))){
             		currentVirus = beings.getVirus();
-                    return State.SICK;
+                    return StateType.SICK;
             	}
             }
         }
-        return State.HEALTHY;
-    }
-
-    public Virus getCurrentVirus() {
-        return currentVirus;
+        return StateType.HEALTHY;
     }
 }

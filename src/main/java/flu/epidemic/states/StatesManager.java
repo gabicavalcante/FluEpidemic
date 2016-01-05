@@ -1,87 +1,39 @@
 package flu.epidemic.states;
 
-import flu.epidemic.livingbeings.LivingBeings;
-import flu.epidemic.livingbeings.Person;
 import flu.epidemic.simulator.Field;
 import flu.epidemic.simulator.Location;
-import flu.epidemic.simulator.Randomizer;
 import flu.epidemic.virus.Virus;
-
-import java.util.Random;
 
 /**
  * @author Gabriela Cavalcante
- * @created 03/01/16.
+ * @version 05/01/16.
  */
-public class StatesManager {
-    private State currentState;
-    private Field field;
-    private Location location;
-    private Virus currentVirus;
+public abstract class StatesManager {
+    protected StateType currentState;
+    protected Field field;
+    protected Location location;
+    protected Virus currentVirus;
 
-    public StatesManager(Field field, Location location) {
-        currentState = State.HEALTHY;
+    protected StatesManager(Field field, Location location) {
+        currentState = StateType.HEALTHY;
         this.field = field;
         this.location = location;
     }
 
-    public StatesManager(State state, Field field, Location location) {
-        this.currentState = state;
-        this.field = field;
-        this.location = location;
-    }
+    abstract StateType analyseStateContagious(Virus virus, int timeContagious);
 
-    public State getState(Virus virus, int timeInfection, int timeContagious, int timeRecover) {
-        if (currentState.isEquals(State.HEALTHY)) {
-            currentState = analyseStateHealthy();
-        } else if (currentState.isEquals(State.SICK)) {
-            currentState = analyseStateSick(virus, timeInfection);
-        } else if (currentState.isEquals(State.CONTAGIUS)) {
-            currentState = analyseStateContagious(virus, timeContagious);
-        } else if (currentState.isEquals(State.RECOVERING)) {
-            currentState = analyseStateRecover(virus, timeRecover);
-        }
-        return currentState;
-    }
+    public abstract StateType getState(Virus virus, int timeInfection, int timeContagious);
 
-    private State analyseStateRecover(Virus virus, int timeRecover) {
-        if (timeRecover == virus.getIncubationTime()) {
-            return State.HEALTHY;
-        }
-        return State.RECOVERING;
-    }
+    public abstract StateType getState(Virus virus, int timeInfection, int timeContagious, int timeRecover);
 
-    private State analyseStateContagious(Virus virus, int timeContagious) {
-        Random rand = Randomizer.getRandom();
-        if (timeContagious == virus.getContagiousTime()) {
-            if (rand.nextDouble() <= virus.getMortalityRate())
-                return State.DEAD;
-            else
-                return State.RECOVERING;
-        }
-        return State.CONTAGIUS;
-    }
-
-    private State analyseStateSick(Virus virus, int timeInfection) {
+    StateType analyseStateSick(Virus virus, int timeInfection) {
         if (timeInfection == virus.getIncubationTime()) {
-            return State.CONTAGIUS;
+            return StateType.CONTAGIOUS;
         }
-        return State.SICK;
+        return StateType.SICK;
     }
 
-    private State analyseStateHealthy() {
-        for (Location loc : field.adjacentLocations(location)) {
-            LivingBeings beings = (LivingBeings) field.getObjectAt(loc);
-            Random rand = Randomizer.getRandom();
-            if (beings != null && beings.getState().isEquals(State.CONTAGIUS)) {
-                if(rand.nextDouble() <= beings.getVirus().getInfectionRate()){
-                	currentVirus = beings.getVirus();
-                    return State.SICK;
-                }
-            }
-        }
-        return State.HEALTHY;
-    }
+    abstract StateType analyseStateHealthy();
 
     public Virus getCurrentVirus() {
         return currentVirus;

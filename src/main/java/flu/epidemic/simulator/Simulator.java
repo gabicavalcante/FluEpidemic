@@ -22,9 +22,9 @@ import java.util.concurrent.TimeUnit;
 public class Simulator {
     // Constants representing configuration information for the simulation.
     // The default width for the grid.
-    private static final int DEFAULT_WIDTH = 120;
+    private static final int DEFAULT_WIDTH = 60;
     // The default depth of the grid.
-    private static final int DEFAULT_DEPTH = 80;
+    private static final int DEFAULT_DEPTH = 60;
     // The probability that a person will be created in any given grid position.
     private static final double PERSON_CREATION_PROBABILITY = 0.08;
     // The probability that a animal will be created in any given grid position.
@@ -76,11 +76,11 @@ public class Simulator {
         SimulatorView view = new GridView(depth, width);
         view.setColor(Person.class, Color.BLACK);
         view.setColor(Chicken.class, Color.BLUE);
-        view.setColor(Pig.class, Color.GRAY);
+        view.setColor(Pig.class, Color.RED);
         view.setColor(Duck.class, Color.ORANGE);
         views.add(view);
 
-        // startGraphView(view);
+        startGraphView(view);
         // Setup a valid starting point.
         reset();
     }
@@ -135,7 +135,7 @@ public class Simulator {
             being.act();
             if (being.isAlive()) {
                 livingBeings.set(i, being);
-            }
+            } 
         }
         updateViews();
     }

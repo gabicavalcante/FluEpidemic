@@ -2,19 +2,26 @@ package flu.epidemic.livingbeings.animals;
 
 import flu.epidemic.livingbeings.Being;
 
-import flu.epidemic.states.State;
+import flu.epidemic.states.StateType;
 import flu.epidemic.livingbeings.LivingBeings;
 import flu.epidemic.simulator.Field;
 import flu.epidemic.simulator.Location;
 import flu.epidemic.simulator.Randomizer;
+import flu.epidemic.states.StatesManager;
+import flu.epidemic.states.StatesManagerAnimal;
+import flu.epidemic.states.StatesManagerPerson;
+import flu.epidemic.virus.Virus;
 
 import java.util.Random;
 
 /**
- * A class representing shared characteristics of animals.
+ * A class representing shared characteristics of animals
  *
  * @author David J. Barnes and Michael Kölling
  * @version 2011.07.31
+ *
+ * @author Gabriela Cavalcante
+ * @version 07/12/2015
  */
 public abstract class Animal extends LivingBeings {
     // Whether the animal is alive or not.
@@ -25,6 +32,8 @@ public abstract class Animal extends LivingBeings {
     private int timeInfection;
     // after contagious, the time of contagious is increment
     private int timeContagious;
+    // manager of the state
+    StatesManager statesManager;
 
     /**
      * Create a new animal at location in field.
@@ -36,10 +45,10 @@ public abstract class Animal extends LivingBeings {
     {
         super(being, field, location);
         this.field = field;
-
+        this.statesManager = new StatesManagerAnimal(being, field, location);
         // some animals already being sick with their specific virus
         Random rand = Randomizer.getRandom();
-        if (rand.nextBoolean()) this.state = State.CONTAGIUS;
+        if (rand.nextBoolean()) this.state = StateType.CONTAGIOUS;
     }
 
     /**
@@ -94,5 +103,25 @@ public abstract class Animal extends LivingBeings {
     protected Field getField()
     {
         return field;
+    }
+
+    @Override
+    public void act() {
+        updateTime();
+
+        this.state = statesManager.getState(virus, timeInfection, timeContagious);
+
+        if (state.isEquals(StateType.DEAD)) {
+            setDead();
+        }
+    }
+
+    private void updateTime() {
+        if (state.isEquals(StateType.SICK)) {
+            virus = statesManager.getCurrentVirus();
+            timeInfection++;
+        }
+        if (state.isEquals(StateType.CONTAGIOUS))
+            timeContagious++;
     }
 }

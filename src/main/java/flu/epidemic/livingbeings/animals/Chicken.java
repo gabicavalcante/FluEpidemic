@@ -4,7 +4,6 @@ import flu.epidemic.livingbeings.Being;
 
 import flu.epidemic.simulator.Field;
 import flu.epidemic.simulator.Location;
-import flu.epidemic.states.State;
 
 /**
  * @author Raquel Oliveira
@@ -13,5 +12,10 @@ import flu.epidemic.states.State;
 public class Chicken extends Bird {
     public Chicken(Field field, Location location) {
         super(Being.CHICKEN, field, location);
+    }
+
+    @Override
+    public void act() {
+        super.act();
     }
 }

@@ -6,15 +6,13 @@ import flu.epidemic.simulator.Location;
 import flu.epidemic.states.*;
 import flu.epidemic.virus.Virus;
 
-import java.util.List;
-
 /**
  * @author David J. Barnes and Michael Kölling
  * @author Gabriela Cavalcante
  * @version 03/12/15.
  */
 public abstract class LivingBeings {
-    protected State state;
+    protected StateType state;
     protected Being type;
     
 
@@ -28,7 +26,7 @@ public abstract class LivingBeings {
         this.virus = null;
         alive = true;
         this.field = field;
-        this.state = State.HEALTHY;
+        this.state = StateType.HEALTHY;
         setLocation(location);
     }
 
@@ -44,7 +42,7 @@ public abstract class LivingBeings {
      */
     public boolean isAlive()
     {
-        if (state.equals(State.DEAD))
+        if (state.equals(StateType.DEAD))
             return true;
         return false;
     }
@@ -98,7 +96,7 @@ public abstract class LivingBeings {
      * Return the animal's state
      * @return the animal's state
      */
-    public State getState() {
+    public StateType getState() {
         return state;
     }
 

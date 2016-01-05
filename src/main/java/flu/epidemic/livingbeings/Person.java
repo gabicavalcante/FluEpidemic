@@ -1,11 +1,8 @@
 package flu.epidemic.livingbeings;
 
-import java.util.Date;
-
-import java.util.List;
-
-import flu.epidemic.states.State;
+import flu.epidemic.states.StateType;
 import flu.epidemic.states.StatesManager;
+import flu.epidemic.states.StatesManagerPerson;
 import flu.epidemic.simulator.Field;
 
 import flu.epidemic.simulator.Location;
@@ -31,7 +28,7 @@ public class Person extends LivingBeings {
 
     public Person(Field field, Location location) {
         super(Being.PERSON, field, location);
-        this.statesManager = new StatesManager(field, location);
+        this.statesManager = new StatesManagerPerson(field, location);
         this.timeInfection = 0;
     }
 
@@ -41,25 +38,25 @@ public class Person extends LivingBeings {
 
         this.state = statesManager.getState(virus, timeInfection, timeContagious, timeRecover);
 
-        if(state.isEquals(State.HEALTHY)) {
+        if(state.isEquals(StateType.HEALTHY)) {
             Location newLocation = getField().freeAdjacentLocation(getLocation());
 
             if (newLocation != null)
                 setLocation(newLocation);
 
-        } else if (state.isEquals(State.DEAD)) {
+        } else if (state.isEquals(StateType.DEAD)) {
             setDead();
         }
     }
 
     private void updateTime() {
-        if (state.isEquals(State.SICK)) {
+        if (state.isEquals(StateType.SICK)) {
             virus = statesManager.getCurrentVirus();
             timeInfection++;
         }
-        if (state.isEquals(State.CONTAGIUS))
+        if (state.isEquals(StateType.CONTAGIOUS))
             timeContagious++;
-        if (state.isEquals(State.RECOVERING))
+        if (state.isEquals(StateType.RECOVERING))
             timeRecover++;
     }
 }

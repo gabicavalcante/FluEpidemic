@@ -178,10 +178,14 @@ public class GraphView implements SimulatorView {
                 Iterator<Class> it = classes.iterator();
                 Class class1 = it.next();
                 Class class2 = it.next();
+                Class class3 = it.next();
+                Class class4 = it.next();
 
                 stats.reset();
                 int count1 = stats.getPopulationCount(field, class1);
                 int count2 = stats.getPopulationCount(field, class2);
+                int count3 = stats.getPopulationCount(field, class3);
+                int count4 = stats.getPopulationCount(field, class4);
 
                 Graphics g = graphImage.getGraphics();
 

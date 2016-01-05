@@ -7,10 +7,10 @@ package flu.epidemic.states;
  * @author Gabriela Cavalcante
  * @created 03/12/2015
  */
-public enum State {
+public enum StateType {
     HEALTHY("healthy"),
     SICK("sick"),
-    CONTAGIUS("contagious"),
+    CONTAGIOUS("contagious"),
     RECOVERING("recovering"),
     DEAD("dead");
 
@@ -20,7 +20,7 @@ public enum State {
      * Constructor enum
      * @param state current state
      */
-    State(String state) {
+    StateType(String state) {
         this.state = state;
     }
 
@@ -32,16 +32,16 @@ public enum State {
         return this.state;
     }
 
-    public boolean isEquals(State state) { return this.state.equalsIgnoreCase(state.toString()); }
+    public boolean isEquals(StateType state) { return this.state.equalsIgnoreCase(state.toString()); }
 
     /**
-     * Method that receive a status as string and return the object State
+     * Method that receive a status as string and return the object StateType
      * @param status string with the status
-     * @return object State
+     * @return object StateType
      */
-    public static State fromString(String status){
+    public static StateType fromString(String status){
         if (status != null){
-            for (State d : State.values()){
+            for (StateType d : StateType.values()){
                 if (d.toString().equalsIgnoreCase(status)) return d;
             }
         }
