@@ -13,7 +13,6 @@ public abstract class Virus {
 
     protected double infectionRate; // of the virus
     protected double mortalityRate; // To verify if a person will recover from the illness or die
-    // TODO: time to contagious to recovering or dead
 
     public double getInfectionRate() { return infectionRate; }
 

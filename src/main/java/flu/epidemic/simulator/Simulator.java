@@ -23,9 +23,9 @@ import java.util.concurrent.TimeUnit;
 public class Simulator {
     // Constants representing configuration information for the simulation.
     // The default width for the grid.
-    private static final int DEFAULT_WIDTH = 60;
+    private static final int DEFAULT_WIDTH = 25;
     // The default depth of the grid.
-    private static final int DEFAULT_DEPTH = 60;
+    private static final int DEFAULT_DEPTH = 25;
     // The probability that a person will be created in any given grid position.
     private static final double PERSON_CREATION_PROBABILITY = 0.08;
     // The probability that a animal will be created in any given grid position.
@@ -81,7 +81,7 @@ public class Simulator {
         view.setColor(Duck.class, Color.ORANGE);
         views.add(view);
 
-        startGraphView(view);
+        // startGraphView(view);
         // Setup a valid starting point.
         reset();
     }
@@ -92,10 +92,10 @@ public class Simulator {
     private void startGraphView(SimulatorView view) {
         // creates a new thread to run the busy GUI
         view = new GraphView(500, 150, 500);
-        view.setColor(Person.class, Color.GREEN);
-        view.setColor(Chicken.class, Color.RED);
-        view.setColor(Pig.class, Color.CYAN);
-        view.setColor(Duck.class, Color.MAGENTA);
+        view.setColor(Person.class, Color.BLACK);
+        view.setColor(Chicken.class, Color.BLUE);
+        view.setColor(Pig.class, Color.RED);
+        view.setColor(Duck.class, Color.ORANGE);
         views.add(view);
     }
 
@@ -115,7 +115,7 @@ public class Simulator {
     public void simulate() {
         for (step = 1; views.get(0).isViable(field) && canContinuos(); step++) {
             try {
-                TimeUnit.MILLISECONDS.sleep(5);
+                TimeUnit.MILLISECONDS.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

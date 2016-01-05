@@ -8,11 +8,11 @@ public class H5N1 extends Virus {
     public H5N1(){
         this.name = TypeVirus.H5N1;
 
-        this.incubationTime = 5;
-        this.recoverTime = 5;
-        this.contagiousTime = 5;
+        this.incubationTime = 2;
+        this.recoverTime = 2;
+        this.contagiousTime = 2;
 
-        this.mortalityRate = 0.55;
-        this.infectionRate = 0.4;
+        this.mortalityRate = 0.85;
+        this.infectionRate = 0.65;
     }
 }
