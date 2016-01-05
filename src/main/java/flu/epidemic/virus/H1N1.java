@@ -11,7 +11,7 @@ public class H1N1 extends Virus {
 
         this.incubationTime = 1;
         this.recoverTime = 3;
-        this.contagiousTime = 1;
+        this.contagiousTime = 5;
 
         this.mortalityRate = 1;
         this.infectionRate = 0.80;
